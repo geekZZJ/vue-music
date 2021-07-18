@@ -781,6 +781,15 @@ babel-plugin-transform-vue-jsx@^3.5.0:
   dependencies:
     esutils "^2.0.2"
 
+babel-polyfill@6.2.0:
+  version "6.2.0"
+  resolved "https://registry.npm.taobao.org/babel-polyfill/download/babel-polyfill-6.2.0.tgz#2d60377e803709bcf69659cf6307ff51420e9119"
+  integrity sha1-LWA3foA3Cbz2llnPYwf/UUIOkRk=
+  dependencies:
+    babel-regenerator-runtime "^6.2.0"
+    babel-runtime "^5.0.0"
+    core-js "^1.0.1"
+
 babel-preset-env@^1.3.2:
   version "1.7.0"
   resolved "https://registry.nlark.com/babel-preset-env/download/babel-preset-env-1.7.0.tgz?cache=0&sync_timestamp=1618932825031&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fbabel-preset-env%2Fdownload%2Fbabel-preset-env-1.7.0.tgz#dea79fa4ebeb883cd35dab07e260c1c9c04df77a"
@@ -838,6 +847,11 @@ babel-preset-stage-3@^6.24.1:
     babel-plugin-transform-exponentiation-operator "^6.24.1"
     babel-plugin-transform-object-rest-spread "^6.22.0"
 
+babel-regenerator-runtime@^6.2.0:
+  version "6.5.0"
+  resolved "https://registry.nlark.com/babel-regenerator-runtime/download/babel-regenerator-runtime-6.5.0.tgz#0e41cd1c9f80442466f015c749fff8ba98f8e110"
+  integrity sha1-DkHNHJ+ARCRm8BXHSf/4upj44RA=
+
 babel-register@^6.26.0:
   version "6.26.0"
   resolved "https://registry.nlark.com/babel-register/download/babel-register-6.26.0.tgz#6ed021173e2fcb486d7acb45c6009a856f647071"
@@ -851,13 +865,20 @@ babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
+babel-runtime@6, babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.nlark.com/babel-runtime/download/babel-runtime-6.26.0.tgz?cache=0&sync_timestamp=1618911095190&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fbabel-runtime%2Fdownload%2Fbabel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
   dependencies:
     core-js "^2.4.0"
     regenerator-runtime "^0.11.0"
+
+babel-runtime@^5.0.0:
+  version "5.8.38"
+  resolved "https://registry.nlark.com/babel-runtime/download/babel-runtime-5.8.38.tgz?cache=0&sync_timestamp=1618911095190&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fbabel-runtime%2Fdownload%2Fbabel-runtime-5.8.38.tgz#1c0b02eb63312f5f087ff20450827b425c9d4c19"
+  integrity sha1-HAsC62MxL18If/IEUIJ7QlydTBk=
+  dependencies:
+    core-js "^1.0.0"
 
 babel-template@^6.24.1, babel-template@^6.26.0:
   version "6.26.0"
@@ -1709,6 +1730,11 @@ copy-webpack-plugin@^4.0.1:
     minimatch "^3.0.4"
     p-limit "^1.0.0"
     serialize-javascript "^1.4.0"
+
+core-js@^1.0.0, core-js@^1.0.1:
+  version "1.2.7"
+  resolved "https://registry.nlark.com/core-js/download/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
+  integrity sha1-ZSKUwUZR2yj6k70tX/KYOk8IxjY=
 
 core-js@^2.4.0, core-js@^2.5.0:
   version "2.6.12"
@@ -2714,6 +2740,11 @@ fast-json-stable-stringify@^2.0.0:
   version "2.1.0"
   resolved "https://registry.nlark.com/fast-json-stable-stringify/download/fast-json-stable-stringify-2.1.0.tgz#874bf69c6f404c2b5d99c481341399fd55892633"
   integrity sha1-h0v2nG9ATCtdmcSBNBOZ/VWJJjM=
+
+fastclick@1.0.6:
+  version "1.0.6"
+  resolved "https://registry.nlark.com/fastclick/download/fastclick-1.0.6.tgz#161625b27b1a5806405936bda9a2c1926d06be6a"
+  integrity sha1-FhYlsnsaWAZAWTa9qaLBkm0Gvmo=
 
 fastparse@^1.1.2:
   version "1.1.2"

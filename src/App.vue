@@ -1,18 +1,19 @@
 <template>
   <div id="app">
-    hello world
+    <MHeader></MHeader>
     <!-- <router-view /> -->
   </div>
 </template>
 
 <script>
+import MHeader from "./components/m-header/m-header.vue"
 export default {
   name: "App",
+  components:{
+    MHeader
+  }
 };
 </script>
 
 <style scoped lang="stylus">
-@import "common/stylus/variable.styl"
-#app
-  color: $color-theme
 </style>
