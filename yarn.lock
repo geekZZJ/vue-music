@@ -6865,10 +6865,10 @@ vue-loader@^13.3.0:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
-vue-router@^3.0.1:
-  version "3.5.2"
-  resolved "https://registry.nlark.com/vue-router/download/vue-router-3.5.2.tgz#5f55e3f251970e36c3e8d88a7cd2d67a350ade5c"
-  integrity sha1-X1Xj8lGXDjbD6NiKfNLWejUK3lw=
+vue-router@2.5.3:
+  version "2.5.3"
+  resolved "https://registry.nlark.com/vue-router/download/vue-router-2.5.3.tgz#073783f564b6aece6c8a59c63e298dc2aabfb51b"
+  integrity sha1-BzeD9WS2rs5silnGPimNwqq/tRs=
 
 vue-style-loader@^3.0.0, vue-style-loader@^3.0.1:
   version "3.1.2"
