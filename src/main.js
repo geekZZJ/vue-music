@@ -1,12 +1,17 @@
-import "babel-polyfill"
+import "babel-polyfill";
 import Vue from "vue";
 import App from "./App";
+import VueLazyload from "vue-lazyload";
 import router from "./router";
-import fastclick from "fastclick"
+import fastclick from "fastclick";
 
-import "./common/stylus/index.styl"
+import "./common/stylus/index.styl";
 
-fastclick.attach(document.body)
+fastclick.attach(document.body);
+
+Vue.use(VueLazyload, {
+  loading: require("./common/image/default.png"),
+});
 
 Vue.config.productionTip = false;
 

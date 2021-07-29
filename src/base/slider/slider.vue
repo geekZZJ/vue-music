@@ -36,6 +36,8 @@ export default {
           delay: 2500,
         },
         loop: this.loop,
+        slidesPerView: 'auto',
+        loopedSlides: 6,
       }
     };
   },
