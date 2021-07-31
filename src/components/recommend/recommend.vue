@@ -18,6 +18,9 @@
           </li>
         </ul>
       </div>
+      <div class="loading-container" v-show="!discList.length">
+        <Loading></Loading>
+      </div>
     </div>
   </div>
 </template>
@@ -26,11 +29,13 @@
 import {getRecommend, getDiscList} from "@/api/recommend";
 import Slider from "@/base/slider";
 import {API, PUBLIC, BANNER} from "@/api/config";
+import Loading from "@/base/loading/loading";
 
 export default {
   name: "recommend",
   components: {
-    Slider
+    Slider,
+    Loading
   },
   directives: {
     highly: {
@@ -47,43 +52,7 @@ export default {
   data() {
     return {
       banners: [],
-      discList: [
-        {
-          imgUrl: "https://qpic.y.qq.com/music_cover/xiabfMZAmQ0PYUzgCvOicArIoGLzqL3n6q3fDiawWkhTTVWgGNM52HBNA/300?n=1",
-          creator: {
-            name: "欧美"
-          },
-          disname: "流行节奏控"
-        },
-        {
-          imgUrl: "https://qpic.y.qq.com/music_cover/xiabfMZAmQ0PYUzgCvOicArIoGLzqL3n6q4X4NiaWS01Fvtn063nqHY2Q/300?n=1",
-          creator: {
-            name: "欧美"
-          },
-          disname: "流行轻有氧"
-        },
-        {
-          imgUrl: "https://qpic.y.qq.com/music_cover/MKjEtF7diatibd6B0iaeF5KguYHTWhScOADLtR9xjUjEEz5uYMCCKOA9w/300?n=1",
-          creator: {
-            name: "最"
-          },
-          disname: "陈奕迅"
-        },
-        {
-          imgUrl: "https://qpic.y.qq.com/music_cover/4pmnRu5sL5QbtO8OS8NKJU7UhBRvQcdookqiaqkurvWR8j7PKeyzcFA/300?n=1",
-          creator: {
-            name: "最"
-          },
-          disname: "SUPER JUNIOR"
-        },
-        {
-          imgUrl: "https://qpic.y.qq.com/music_cover/7vlTTvwBiaibKJpyXffTHicMpDXK5xPJiaPoPSy3PBexF9zRK9veKIXuxw/300?n=1",
-          creator: {
-            name: "古典"
-          },
-          disname: "美妙心情"
-        },
-      ]
+      discList: []
     };
   },
   created() {
@@ -93,6 +62,7 @@ export default {
   methods: {
     async _getDiscList() {
       const result = await getDiscList();
+      this.discList = result.data
     },
     async _getRecommend() {
       const result = await getRecommend();
