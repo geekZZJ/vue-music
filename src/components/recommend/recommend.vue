@@ -1,12 +1,12 @@
 <template>
   <div class="recommend">
-    <div class="recommend-content" id="recommend-content">
-      <div class="slider-wrapper" id="slider-wrapper">
+    <div class="recommend-content">
+      <div class="slider-wrapper">
         <Slider :banners="banners"></Slider>
       </div>
-      <div class="recommend-list" v-highly>
+      <div class="recommend-list">
         <h1 class="list-title">热门歌单推荐</h1>
-        <ul class="list-desc">
+        <ul>
           <li v-for="item in discList" class="item">
             <div class="icon">
               <img width="60" height="60" v-lazy="item.imgUrl" alt="">
@@ -36,18 +36,6 @@ export default {
   components: {
     Slider,
     Loading
-  },
-  directives: {
-    highly: {
-      inserted: function (el) {
-        const contentHeight = document.getElementById("recommend-content").clientHeight;
-        let sliderHeight;
-        setTimeout(() => {
-          sliderHeight = document.getElementById("slider-wrapper").clientHeight;
-          el.style.height = contentHeight - sliderHeight + "px";
-        }, 200);
-      },
-    }
   },
   data() {
     return {
@@ -80,19 +68,14 @@ export default {
 @import "../../common/stylus/variable"
 
 .recommend
-  position: fixed
   width: 100%
-  top: 88px
-  bottom: 0
 
   .recommend-content
     height: 100%
-    overflow: hidden
 
     .slider-wrapper
       position: relative
       width: 100%
-      overflow: hidden
 
     .recommend-list
       display: flex;
@@ -105,36 +88,31 @@ export default {
         font-size: $font-size-medium
         color: $color-theme
 
-      .list-desc
-        overflow: auto
-        flex: 1
+      .item
+        display: flex
+        box-sizing: border-box
+        align-items: center
+        padding: 0 20px 20px 20px
 
-        .item
+        .icon
+          flex: 0 0 60px
+          width: 60px
+          padding-right: 20px
+
+        .text
           display: flex
-          box-sizing: border-box
-          align-items: center
-          padding: 0 20px 20px 20px
+          flex-direction: column
+          justify-content: center
+          line-height: 20px
+          overflow: hidden
+          font-size: $font-size-medium
 
-          .icon
-            flex: 0 0 60px
-            width: 60px
-            padding-right: 20px
+          .name
+            margin-bottom: 10px
+            color: $color-text
 
-          .text
-            display: flex
-            flex-direction: column
-            justify-content: center
-            flex: 1
-            line-height: 20px
-            overflow: hidden
-            font-size: $font-size-medium
-
-            .name
-              margin-bottom: 10px
-              color: $color-text
-
-            .desc
-              color: $color-text-d
+          .desc
+            color: $color-text-d
 
     .loading-container
       position: absolute
