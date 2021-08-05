@@ -11,14 +11,12 @@
         </uL>
       </li>
     </ul>
-    <!--    <div class="list-shortcut" @touchstart="onShortcutTouchStart" @touchmove.stop.prevent="onShortcutTouchMove">-->
-    <!--      <ul>-->
-    <!--        <li v-for="(item, index) in shortcutList" :data-index="index" class="item"-->
-    <!--            :class="{'current':currentIndex===index}">{{item}}-->
-
-    <!--        </li>-->
-    <!--      </ul>-->
-    <!--    </div>-->
+    <div class="list-shortcut" @touchstart="onShortcutTouchStart">
+      <ul>
+        <li v-for="(item, index) in shortcutList" :key="index" :data-index="index" class="item">{{ item }}
+        </li>
+      </ul>
+    </div>
     <!--    <div class="list-fixed" ref="fixed" v-show="fixedTitle">-->
     <!--      <div class="fixed-title">{{fixedTitle}} </div>-->
     <!--    </div>-->
@@ -26,6 +24,8 @@
 </template>
 
 <script>
+import {getData} from "@/common/js/dom";
+
 export default {
   name: "listview",
   props: {
@@ -33,6 +33,26 @@ export default {
       type: Object,
       default: () => {
       }
+    }
+  },
+  computed: {
+    shortcutList() {
+      return Object.keys(this.data).map(item => item.substr(0, 1));
+    }
+  },
+  methods: {
+    onShortcutTouchStart(e) {
+      const idx = getData(e.target, "index");
+      const height = this.calScrollHeight(idx);
+      window.scrollTo({
+        top: height,
+        behavior: "smooth"
+      });
+    },
+    calScrollHeight(index) {
+      // 如 热门 + 歌手(12个) + pd 高度
+      const height = index * 30 + 12 * 70 * index + index * 30 + 88;
+      return height;
     }
   }
 };
@@ -75,7 +95,7 @@ export default {
         font-size: $font-size-medium
 
   .list-shortcut
-    position: absolute
+    position: fixed
     z-index: 30
     right: 0
     top: 50%
@@ -85,11 +105,9 @@ export default {
     border-radius: 10px
     text-align: center
     background: $color-background-d
-    font-family: Helvetica
 
     .item
       padding: 3px
-      line-height: 1
       color: $color-text-l
       font-size: $font-size-small
 
