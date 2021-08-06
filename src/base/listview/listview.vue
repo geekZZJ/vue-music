@@ -1,7 +1,7 @@
 <template>
   <div class="listview">
     <ul>
-      <li v-for="(value,key) in data" class="list-group" ref="listGroup">
+      <li v-for="(value,key) in data" class="list-group">
         <h2 class="list-group-title">{{ key }}</h2>
         <uL>
           <li v-for="item in value" class="list-group-item">
@@ -11,9 +11,10 @@
         </uL>
       </li>
     </ul>
-    <div class="list-shortcut" @touchstart="onShortcutTouchStart">
+    <div class="list-shortcut" @touchstart="onShortcutTouchStart" @touchmove.prevent.stop="onShortcutTouchMove">
       <ul>
-        <li v-for="(item, index) in shortcutList" :key="index" :data-index="index" class="item">{{ item }}
+        <li v-for="(item, index) in shortcutList" :key="index" :data-index="index" class="item"
+            :class="{'current':currentIndex===index}">{{ item }}
         </li>
       </ul>
     </div>
@@ -25,6 +26,7 @@
 
 <script>
 import {getData} from "@/common/js/dom";
+import _ from "lodash";
 
 export default {
   name: "listview",
@@ -35,24 +37,64 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      anchorHeight: 18,
+      currentIndex: 0
+    };
+  },
   computed: {
     shortcutList() {
       return Object.keys(this.data).map(item => item.substr(0, 1));
     }
   },
+  beforeMount() {
+    window.addEventListener("scroll", _.throttle(this.highLightIdx, 200));
+  },
+  created() {
+    this.touch = {};
+  },
+  beforeDestroy() {
+    window.addEventListener("scroll", this.highLightIdx);
+  },
   methods: {
+    // 右侧高亮位置
+    highLightIdx() {
+      const scrollTop = document.documentElement.scrollTop;
+      console.log(scrollTop)
+      const idx = Math.floor((scrollTop - 88) / (30 + 30 + 12 * 70));
+      this.currentIndex = idx >= 0 ? idx : 0;
+    },
+    // 滑动高度不好确定，暂未实现
+    onShortcutTouchMove(e) {
+      // const firstTouch = e.touches[0]
+      // this.touch.y2 = firstTouch.pageY;
+      // const delta = (this.touch.y2 - this.touch.y1) / this.anchorHeight | 0;
+      // const anchorIndex = parseInt(this.touch.anchorIndex) + delta;
+      // const height = this.calScrollHeight(anchorIndex);
+      // window.scrollTo({
+      //   top: height,
+      //   behavior: "smooth"
+      // });
+    },
     onShortcutTouchStart(e) {
       const idx = getData(e.target, "index");
+      this.touch.y1 = e.target.offsetTop;
+      this.touch.anchorIndex = idx;
       const height = this.calScrollHeight(idx);
       window.scrollTo({
         top: height,
         behavior: "smooth"
       });
     },
+    /**
+     * 计算需要滚动的高度
+     * @param index
+     * @returns {number}
+     */
     calScrollHeight(index) {
       // 如 热门 + 歌手(12个) + pd 高度
-      const height = index * 30 + 12 * 70 * index + index * 30 + 88;
-      return height;
+      return index * 30 + 12 * 70 * index + index * 30 + 88;
     }
   }
 };
