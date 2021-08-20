@@ -4,7 +4,7 @@
       <li v-for="(value,key) in data" class="list-group">
         <h2 class="list-group-title">{{ key }}</h2>
         <uL>
-          <li v-for="item in value" class="list-group-item">
+          <li @click="selectItem(item)" v-for="item in value" class="list-group-item">
             <img class="avatar" v-lazy="item.avatar">
             <span class="name">{{ item.name }}</span>
           </li>
@@ -65,6 +65,9 @@ export default {
     window.addEventListener("scroll", this.highLightIdx);
   },
   methods: {
+    selectItem(item) {
+      this.$emit("select", item);
+    },
     // 右侧高亮位置
     highLightIdx() {
       // 除以 热门 + 歌手(12个) + pd 高度
