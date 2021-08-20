@@ -18,9 +18,11 @@
         </li>
       </ul>
     </div>
-    <!--    <div class="list-fixed" ref="fixed" v-show="fixedTitle">-->
-    <!--      <div class="fixed-title">{{fixedTitle}} </div>-->
-    <!--    </div>-->
+    <transition>
+      <div class="list-fixed" v-show="showFixedTitle">
+        <div class="fixed-title">{{ fixedTitle }}</div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -40,12 +42,17 @@ export default {
   data() {
     return {
       anchorHeight: 18,
-      currentIndex: 0
+      currentIndex: 0,
+      showFixedTitle: false
     };
   },
   computed: {
     shortcutList() {
       return Object.keys(this.data).map(item => item.substr(0, 1));
+    },
+    fixedTitle() {
+      const shortcutList = Object.keys(this.data);
+      return shortcutList[this.currentIndex];
     }
   },
   beforeMount() {
@@ -60,8 +67,13 @@ export default {
   methods: {
     // 右侧高亮位置
     highLightIdx() {
+      // 除以 热门 + 歌手(12个) + pd 高度
       const scrollTop = document.documentElement.scrollTop;
-      console.log(scrollTop)
+      if (scrollTop > 88) {
+        this.showFixedTitle = true;
+      } else {
+        this.showFixedTitle = false;
+      }
       const idx = Math.floor((scrollTop - 88) / (30 + 30 + 12 * 70));
       this.currentIndex = idx >= 0 ? idx : 0;
     },
@@ -157,7 +169,7 @@ export default {
         color: $color-theme
 
   .list-fixed
-    position: absolute
+    position: fixed
     top: 0
     left: 0
     width: 100%
@@ -169,10 +181,4 @@ export default {
       font-size: $font-size-small
       color: $color-text-l
       background: $color-highlight-background
-
-  .loading-container
-    position: absolute
-    width: 100%
-    top: 50%
-    transform: translateY(-50%)
 </style>
