@@ -8,6 +8,7 @@
 <script>
 import {getSingerList} from "@/api/singer";
 import ListView from "@/base/listview";
+import {mapMutations} from "vuex";
 
 export default {
   name: "singer",
@@ -23,10 +24,14 @@ export default {
     this._getSingerList();
   },
   methods: {
+    ...mapMutations({
+      setSinger: "SET_SINGER"
+    }),
     selectSinger(singer) {
       this.$router.push({
         path: `/singer/${singer.name}`
       });
+      this.setSinger(singer);
     },
     async _getSingerList() {
       const result = await getSingerList();
