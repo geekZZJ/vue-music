@@ -6,14 +6,31 @@
 
 <script>
 import {mapGetters} from "vuex";
+import {getSingerDetail} from "@/api/singer";
 
 export default {
   name: "singer-detail",
   computed: {
     ...mapGetters(["singer"])
   },
+  data() {
+    return {
+      song: []
+    };
+  },
   created() {
-    console.log(this.singer);
+    this._getDetail();
+  },
+  methods: {
+    async _getDetail() {
+      if (!this.singer.name) {
+        this.$router.push("/singer");
+        return;
+      }
+      const result = await getSingerDetail(this.singer.name);
+      console.log(result);
+      this.song = result;
+    }
   }
 };
 </script>
