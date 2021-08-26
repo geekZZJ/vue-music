@@ -1,7 +1,7 @@
 <template>
   <div class="singer">
-    <ListView @select="selectSinger" :data="singers"></ListView>
-    <router-view></router-view>
+    <ListView @select="selectSinger" :data="singers" v-show="showList"></ListView>
+    <router-view @showList="showLists"></router-view>
   </div>
 </template>
 
@@ -17,7 +17,8 @@ export default {
   },
   data() {
     return {
-      singers: {}
+      singers: {},
+      showList: true,
     };
   },
   created() {
@@ -28,10 +29,14 @@ export default {
       setSinger: "SET_SINGER"
     }),
     selectSinger(singer) {
+      this.showList = false;
       this.$router.push({
         path: `/singer/${singer.name}`
       });
       this.setSinger(singer);
+    },
+    showLists() {
+      this.showList = true;
     },
     async _getSingerList() {
       const result = await getSingerList();
