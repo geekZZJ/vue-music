@@ -1,12 +1,14 @@
 <template>
   <div class="singer">
-    <ListView :data="singers"></ListView>
+    <ListView @select="selectSinger" :data="singers" v-show="showList"></ListView>
+    <router-view @showList="showLists"></router-view>
   </div>
 </template>
 
 <script>
 import {getSingerList} from "@/api/singer";
 import ListView from "@/base/listview";
+import {mapMutations} from "vuex";
 
 export default {
   name: "singer",
@@ -15,13 +17,27 @@ export default {
   },
   data() {
     return {
-      singers: {}
+      singers: {},
+      showList: true,
     };
   },
   created() {
     this._getSingerList();
   },
   methods: {
+    ...mapMutations({
+      setSinger: "SET_SINGER"
+    }),
+    selectSinger(singer) {
+      this.showList = false;
+      this.$router.push({
+        path: `/singer/${singer.name}`
+      });
+      this.setSinger(singer);
+    },
+    showLists() {
+      this.showList = true;
+    },
     async _getSingerList() {
       const result = await getSingerList();
       this.cateData(result.data);
