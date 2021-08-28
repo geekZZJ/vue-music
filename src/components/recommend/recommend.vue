@@ -12,8 +12,8 @@
               <img width="60" height="60" v-lazy="item.imgUrl" alt="">
             </div>
             <div class="text">
-              <h2 class="name">{{ item.creator.name }}</h2>
-              <p class="desc">{{ item.disname }}</p>
+              <h2 class="desc">{{ item.disname }}</h2>
+              <p class="name">{{ item.creator.name }}</p>
             </div>
           </li>
         </ul>
@@ -108,11 +108,11 @@ export default {
           font-size: $font-size-medium
 
           .name
-            margin-bottom: 10px
-            color: $color-text
+            color: $color-text-d
 
           .desc
-            color: $color-text-d
+            margin-bottom: 10px
+            color: $color-text
 
     .loading-container
       position: absolute
