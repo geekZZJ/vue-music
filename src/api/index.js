@@ -14,3 +14,17 @@ export const GET = (url, params = {}) => {
     });
   });
 };
+
+export const POST = (url, params = {}) => {
+  return new Promise((resolve, reject) => {
+    axios({
+      method: "post",
+      url: API + url,
+      data: params,
+    }).then(res => {
+      resolve(res.data);
+    }).catch(err => {
+      reject(err);
+    });
+  });
+};
