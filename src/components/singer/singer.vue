@@ -23,7 +23,6 @@ export default {
   },
   created() {
     this._getSingerList();
-    // this.saveSong();
   },
   methods: {
     ...mapMutations({
@@ -35,22 +34,6 @@ export default {
         path: `/singer/${singer.name}`
       });
       this.setSinger(singer);
-    },
-    async saveSong() {
-      const result = await addSongAuto();
-      console.log("result", result.data.data);
-      const lists = result.data.data.list;
-      for (let i = 0; i < lists.length; i++) {
-        const params = {
-          song: lists[i].name,
-          singer: lists[i].artist,
-          album: lists[i].album,
-          image: lists[i].pic,
-          url: `http://localhost:7001/public/${lists[i].artist}/${lists[i].name}.mp3`,
-          duration: `${lists[i].duration}`
-        };
-        await addSong(params)
-      }
     },
     showLists() {
       this.showList = true;
